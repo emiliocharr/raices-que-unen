@@ -190,9 +190,23 @@ const artisanTeams = {
     ]
   ]
 };
+const artisanPortraits = {
+  'Mateo Santiago López': [0, 0],
+  'Lucía Hernández Cruz': [1, 0],
+  'Tomás Pérez Méndez': [2, 0],
+  'Elisa Martínez Ruiz': [3, 0],
+  'Beatriz Ramos Jiménez': [0, 1],
+  'Rosa Bautista García': [1, 1],
+  'Diego Cruz Ramírez': [2, 1],
+  'Esteban García López': [3, 1]
+};
+function artisanPortrait(name) {
+  const [column, row] = artisanPortraits[name];
+  return `<span class="artisan-portrait" style="--portrait-column:${column};--portrait-row:${row}"><img src="assets/artesanos-conceptuales.webp" alt="Retrato conceptual generado con IA de ${name}, personaje ficticio" loading="lazy" decoding="async" width="1536" height="1024"></span>`;
+}
 function artisanPanel(code) {
   const [principal, ...collaborators] = artisanTeams[code];
-  return `<section class="artisan-team" aria-label="Equipo artesanal de demostración"><div class="artisan-primary"><p class="eyebrow">${principal[1].toUpperCase()}</p><h4>${principal[0]}</h4></div><div class="artisan-collaborators">${collaborators.map(([name,role])=>`<div><strong>${name}</strong><span>${role}</span></div>`).join('')}</div><p class="artisan-demo">Nombres ficticios para esta demostración. Autoría real pendiente de documentar.</p></section>`;
+  return `<section class="artisan-team" aria-label="Equipo artesanal de demostración"><div class="artisan-primary">${artisanPortrait(principal[0])}<div class="artisan-identity"><p class="eyebrow">${principal[1].toUpperCase()}</p><h4>${principal[0]}</h4><p class="artisan-primary-caption">Las manos que dan vida a la pieza.</p></div></div><div class="artisan-collaborators">${collaborators.map(([name,role])=>`<div class="artisan-person">${artisanPortrait(name)}<div class="artisan-identity"><strong>${name}</strong><span>${role}</span></div></div>`).join('')}</div><p class="artisan-demo">Personajes ficticios y retratos conceptuales generados con IA para esta demostración. Autoría real pendiente de documentar.</p></section>`;
 }
 let activeCode = null;
 let activeTab = 'cultura';
